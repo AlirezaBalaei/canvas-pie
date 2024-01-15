@@ -1,0 +1,34 @@
+{
+  "name": "canvas-pie",
+  "version": "1.0.0",
+  "description": "pie chart created with canvas",
+  "main": "src/js/chart.js",
+  "scripts": {
+    "start": "http-server -o /src/index.html -c-1",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlirezaBalaei/canvas-pie.git"
+  },
+  "keywords": [
+    "canvas",
+    "html5",
+    "pie",
+    "data",
+    "visualization",
+    "d3"
+  ],
+  "author": "Alireza Balaei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlirezaBalaei/canvas-pie/issues"
+  },
+  "homepage": "https://github.com/AlirezaBalaei/canvas-pie#readme",
+  "devDependencies": {
+    "http-server": "^0.12.3"
+  },
+  "dependencies": {
+    "d3": "^7.8.5"
+  }
+}
