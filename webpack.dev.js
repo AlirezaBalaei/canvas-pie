@@ -1,89 +1,13 @@
-const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const TerserPlugin = require('terser-webpack-plugin')
-const CopyPlugin = require('copy-webpack-plugin')
-
+const path = require("path")
 module.exports = {
-  mode: 'development',
-
-  devServer: {
-    hot: true,
-    static: path.join(__dirname, 'dist'),
-    historyApiFallback: true
-  },
-  context: __dirname,
-  entry: {
-    main: './src/js/index.js',
-    styles: './src/css/main.css'
-  },
-  stats: { children: true },
+  entry: "./src/js/chart.js",
   output: {
-    path: path.join(__dirname, 'dist'),
-    publicPath: '',
-    filename: '[name].[contenthash].js',
-    globalObject: 'self'
+    path: path.resolve(__dirname, "dist"),
+    filename: "canvas-pie-webpack.bundle.js"
   },
-  optimization: {
-    minimize: true,
-    // removeEmptyChunks: false,
-    minimizer: [
-      new TerserPlugin({
-        terserOptions: {
-          keep_classnames: true,
-          keep_fnames: true
-        }
-      })
-    ]
-  },
-  module: {
-    rules: [
-      {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
-        use: {
-          loader: 'babel-loader',
-          options: {
-            presets: ['@babel/preset-env'],
-            plugins: [
-              [
-                require.resolve('@babel/plugin-transform-runtime'),
-                {
-                  regenerator: true,
-                  corejs: false,
-                  useESModules: true,
-                  helpers: false
-                }
-              ]
-            ]
-          }
-        }
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        loader: 'file-loader'
-      },
-      {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, 'css-loader']
-      },
-      { test: /\.pug$/, loader: 'pug-loader' },
-      {
-        test: /\.html$/i,
-        loader: 'html-loader'
-      }
-    ]
-  },
-  plugins: [
-    new CleanWebpackPlugin(),
-    new HtmlWebpackPlugin({
-      inject: false,
-      minify: false,
-      cache: false,
-      template: 'template.pug',
-      filename: 'index.html'
-    }),
-    new MiniCssExtractPlugin({ filename: '[name].[contenthash].css' }),
-  ]
+  resolve: {
+    alias: {
+      node_modules: path.join(__dirname, "node_modules")
+    }
+  }
 }
